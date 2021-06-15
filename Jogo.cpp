@@ -10,8 +10,8 @@ void criaJogo(Node **pilha1, Node **pilha2, Node **pilha3){
     *pilha3 = Cria();
     for(int i = QUANT_DISCO; i>0; i--){
         Empilha(pilha1, i);
-    }  
     }
+}
 
 void transfereDisco(Node **pilhaOrig, Node **pilhaDest){
     int tOrig, tDest;
@@ -40,7 +40,7 @@ void imprimePilha(Node *pilha){
         }
         cout << endl;
     }
-    
+
     while(!Vazia(pAux)){
         x = Desempilha(&pAux);
         Empilha(&pilha, x);

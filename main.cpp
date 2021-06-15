@@ -2,6 +2,7 @@
 #include <string>
 #include "Jogo.h"
 #include "Pilha.h"
+
 using namespace std;
 
 int main() {
@@ -9,11 +10,11 @@ int main() {
   int orig, dest;
 
   criaJogo(&pilha1, &pilha2, &pilha3);
-  
+
   while(!fimJogo(pilha3)){
     cout << endl << endl;
     imprimePilha(pilha1, pilha2, pilha3);
-    
+
     // Exibição pelo terminal
     // pedir transferencia
     cout << "Origem: ";
