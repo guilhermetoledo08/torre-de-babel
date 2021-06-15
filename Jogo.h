@@ -13,5 +13,5 @@ void transfereDisco(Node**, Node**);
 void imprimePilha(Node *);
 // Imprime todas as pilhas
 void imprimePilha(Node *, Node *, Node *);
-// Verifica se a última pilha tem todos os discos (fim de jogo)
-bool verificaTermino(Node *);
+// Verifica se a última pilha tem todos os discos (fim de jogo = TRUE)
+bool fimJogo(Node *);

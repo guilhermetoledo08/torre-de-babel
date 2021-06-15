@@ -33,7 +33,7 @@ bool Vazia(Node *pilha){
 
 int PegaTopo(Node *pilha){
   if(Vazia(pilha)){
-    return QUANT_DISCO;
+    return QUANT_DISCO+1;
   }
   int valor = pilha->disco;
   return valor;

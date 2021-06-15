@@ -9,12 +9,12 @@ int main() {
   int orig, dest;
 
   criaJogo(&pilha1, &pilha2, &pilha3);
-
-
-  while(!verificaTermino(pilha3)){
+  
+  while(!fimJogo(pilha3)){
+    cout << endl << endl;
     imprimePilha(pilha1, pilha2, pilha3);
     
-    // PARA TESTES
+    // Exibição pelo terminal
     // pedir transferencia
     cout << "Origem: ";
     cin >> orig;
@@ -31,7 +31,7 @@ int main() {
               transfereDisco(&pilha1, &pilha3);
               break;
             default:
-              cout << "Pilha nao existe! Deve ser 1, 2 ou 3" <<endl;
+              cout << "Pilha nao existe! Deve ser 1, 2 ou 3." <<endl;
               break;
           }
           break;
@@ -44,7 +44,7 @@ int main() {
               transfereDisco(&pilha2, &pilha3);
               break;
             default:
-              cout << "Pilha nao existe! Deve ser 1, 2 ou 3" <<endl;
+              cout << "Pilha nao existe! Deve ser 1, 2 ou 3." <<endl;
               break;
           }
           break;
@@ -57,15 +57,18 @@ int main() {
               transfereDisco(&pilha3, &pilha2);
               break;
             default:
-              cout << "Pilha nao existe! Deve ser 1, 2 ou 3" <<endl;
+              cout << "Pilha nao existe! Deve ser 1, 2 ou 3." <<endl;
               break;
           }
           break;
           default:
-            cout << "Pilha nao existe! Deve ser 1, 2 ou 3" <<endl;
+            cout << "Pilha nao existe! Deve ser 1, 2 ou 3." <<endl;
             break;
       }
+    }else{
+      cout << "As pilhas devem ser diferentes!!" <<endl;
     }
   }
+  cout <<endl << "Parabens, voce ganhou!!";
   return 0;
 }
