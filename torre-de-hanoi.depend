@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1623783029 source:c:\users\guilhermevs\desktop\torre-de-hanoi\main.cpp
+	<iostream>
+	<string>
+	"Pilha.h"
+
+1623783029 c:\users\guilhermevs\desktop\torre-de-hanoi\pilha.h
+	<string>
+
+1623783029 source:c:\users\guilhermevs\desktop\torre-de-hanoi\pilha.cpp
+	"Pilha.h"
+	<iostream>
+
