@@ -17,8 +17,6 @@ void transfereDisco(Node **pilhaOrig, Node **pilhaDest){
     int tOrig, tDest;
     tOrig = PegaTopo(*pilhaOrig);
     tDest = PegaTopo(*pilhaDest);
-    cout << tOrig << endl;
-    cout << tDest << endl;
     if(tOrig < tDest){
         int valor = Desempilha(pilhaOrig);
         Empilha(pilhaDest, valor);

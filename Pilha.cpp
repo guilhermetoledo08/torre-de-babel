@@ -25,10 +25,7 @@ int Desempilha(Node **ppilha){
 }
 
 bool Vazia(Node *pilha){
-  if(pilha == nullptr){
-    return true;
-  }
-  return false;
+  return pilha == nullptr;
 }
 
 int PegaTopo(Node *pilha){
