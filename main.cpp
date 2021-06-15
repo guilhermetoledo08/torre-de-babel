@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include "Pilha.h"
-using namespace std;
 
+using namespace std;
 
 int main() {
   Node *pilha1, *pilha2, *pilha3;
