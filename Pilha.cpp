@@ -7,17 +7,17 @@ Node *Cria(){
   return nullptr;
 }
 
-void Empilha(Node **ppilha, string disco){
+void Empilha(Node **ppilha, int disco){
   Node *novoNo = new Node;
   novoNo->disco = disco;
   novoNo->prox = *ppilha;
   *ppilha = novoNo;
 }
 
-string Desempilha(Node **ppilha){
+int Desempilha(Node **ppilha){
   Node *noExcluido;
   noExcluido = *ppilha;
-  string valor = noExcluido->disco;
+  int valor = noExcluido->disco;
   *ppilha = noExcluido->prox;
   delete noExcluido;
   noExcluido = nullptr;
@@ -31,28 +31,10 @@ bool Vazia(Node *pilha){
   return false;
 }
 
-string PegaTopo(Node *pilha){
-  string valor = pilha->disco;
+int PegaTopo(Node *pilha){
+  if(Vazia(pilha)){
+    return QUANT_DISCO;
+  }
+  int valor = pilha->disco;
   return valor;
-}
-
-void transfereDisco(Node **pilhaOrig, Node **pilhaDest){
-  string valor = Desempilha(pilhaOrig);
-  Empilha(pilhaDest, valor);
-}
-
-void imprimePilha(Node *pilha){
-  Node *pAux;
-  pAux = Cria();
-  string x;
-
-  while(Vazia(pilha) != true){
-    x = Desempilha(&pilha);
-    Empilha(&pAux, x);
-    cout << x << endl;
-  }
-  while(Vazia(pAux) != true){
-    x = Desempilha(&pAux);
-    Empilha(&pilha, x);
-  }
 }

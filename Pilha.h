@@ -3,24 +3,21 @@
 #include <string>
 using namespace std;
 
+// quantidade de discos utilizados
+#define QUANT_DISCO 5
+
 typedef struct node{
-  string disco;
-  struct node *prox;
+    int disco;
+    struct node *prox;
 }Node;
 
 // Cria a pilha
 Node *Cria();
 // Empilha o disco na pilha
-void Empilha(Node **, string);
+void Empilha(Node **, int);
 // Desempilha o disco no topo da pilha
-string Desempilha(Node **);
+int Desempilha(Node **);
 // Verifica se a pilha está vazia
 bool Vazia(Node *);
 // Retorna o topo da Pilha
-string PegaTopo(Node *);
-
-// Transfere o disco de uma pilha para outra
-void transfereDisco(Node**, Node**);
-
-// Imprime as pilhas
-void imprimePilha(Node *);
+int PegaTopo(Node *);
