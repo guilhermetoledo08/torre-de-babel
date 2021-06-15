@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "Jogo.cpp"
-#include "Pilha.cpp"
+#include "Jogo.h"
+#include "Pilha.h"
 
 using namespace std;
 
