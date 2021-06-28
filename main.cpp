@@ -9,19 +9,40 @@ const int largura_t = 980;
 const int altura_t = 480;
 const float bloco_l = largura_t/5;
 const float bloco_a = altura_t/5;
-float pos_x = bloco_l-150;
-float pos_y = 367;
 
-typedef struct rec {
-   // al_draw_filled_rectangle(float, float, float, float, al_map_rgb(int, int, int));
-    //al_draw_filled_rectangle(pos_x+(5*n), pos_y-(30*n), pos_x+(150+10*n), pos_y-(30*n)+30, al_map_rgb(rand()%255, rand()%255, rand()%255));
-} Retangulo;
+typedef struct
+{
+    float x;
+    float y;
+    float largura;
+} ponto;
 
 int main()
 {
+    int n;
+    scanf("%d", &n);
+
+    float pos_x = bloco_l+3-150;
+    float pos_y = 367;
+
+    ponto retangulos[n];
+
+    for(int i = 0; i < n; i++) {
+        if(i == 0)
+        {
+            retangulos[i].x = pos_x;
+            retangulos[i].largura = bloco_l+104;
+        }
+        else{
+            retangulos[i].x = pos_x+((25/1.4)*i);
+            retangulos[i].largura = bloco_l+104-((50/1.4)*i);
+        }
+        retangulos[i].y = pos_y-(i*30);
+        std::cout << "X: " << retangulos[i].x << " Y: " << retangulos[i].y << std::endl;
+    }
+
     bool fim = false, mouse = false;
     ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
-    BITMAP *ret;
 
     // This command create a screen
     ALLEGRO_DISPLAY* display;
@@ -65,16 +86,16 @@ int main()
             switch(ev.keyboard.keycode)
             {
             case ALLEGRO_KEY_UP:
-                pos_y -= 10;
+                //pos_y -= 10;
                 break;
             case ALLEGRO_KEY_DOWN:
-                pos_y += 10;
+               // pos_y += 10;
                 break;
             case ALLEGRO_KEY_RIGHT:
-                pos_x += (largura_t/2)-bloco_l;
+              //  pos_x += (largura_t/2)-bloco_l;
                 break;
             case ALLEGRO_KEY_LEFT:
-                pos_x -= (largura_t/2)-bloco_l;
+              //  pos_x -= (largura_t/2)-bloco_l;
                 break;
             }
         }
@@ -88,33 +109,73 @@ int main()
                 mouse = !mouse;
         }
 
+        //std::cout << "0 largura: " << retangulos[0].largura << std::endl;
+        //std::cout << "1 largura: " << retangulos[1].largura << std::endl;
+        //std::cout << "2 largura: " << retangulos[2].largura << std::endl;
+        std::cout << "X: " << ev.mouse.x << "Y: " << ev.mouse.y << std::endl;
+
+        /// ---- Desenhos ----
+
+        /// Torre 1
         al_draw_line(bloco_l, bloco_a, bloco_l, 400, al_map_rgb(148, 104, 70), 6);
+
+        /// Torre 2
         al_draw_line(largura_t/2, bloco_a, largura_t/2, 400, al_map_rgb(148, 104, 70), 6);
+
+        /// Torre 3
         al_draw_line(largura_t-bloco_l, bloco_a, largura_t-bloco_l, 400, al_map_rgb(148, 104, 70), 6);
+
+        /// Linha horizontal
         al_draw_line(bloco_l-150, 400, largura_t-bloco_l+150, 400, al_map_rgb(148, 104, 70), 6);
 
-        al_draw_filled_rectangle(bloco_l/1.2, 307, (1.5*bloco_l-(bloco_l*0.32)), 337, al_map_rgb(121, 82, 179));
-        al_draw_filled_rectangle(bloco_l/1.5, 337, (1.5*bloco_l-(bloco_l*0.16)), 367, al_map_rgb(251, 54, 64));
-        al_draw_filled_rectangle(pos_x, pos_y, pos_x+300, pos_y+30, al_map_rgb(92, 51, 246));
+        /// Discos
+        al_draw_filled_rectangle(retangulos[2].x, retangulos[2].y, retangulos[2].x+retangulos[2].largura, retangulos[2].y+30, al_map_rgb(121, 82, 179));
+        al_draw_filled_rectangle(retangulos[1].x, retangulos[1].y, retangulos[1].x+retangulos[1].largura, retangulos[1].y+30, al_map_rgb(251, 54, 64));
+        al_draw_filled_rectangle(retangulos[0].x, retangulos[0].y, retangulos[0].x+retangulos[0].largura, retangulos[0].y+30, al_map_rgb(92, 51, 246));
 
-        std::cout << "X: " << ev.mouse.x << " Y: " << ev.mouse.y << std::endl;
+        switch(n)
+        {
+            case 4:
+                al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+                break;
+            case 5:
+                al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
+                al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+                break;
+            case 6:
+                al_draw_filled_rectangle(retangulos[5].x, retangulos[5].y, retangulos[5].x+retangulos[5].largura, retangulos[5].y+30, al_map_rgb(120, 222, 199));
+                al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
+                al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+                break;
+            case 7:
+                al_draw_filled_rectangle(retangulos[6].x, retangulos[6].y, retangulos[6].x+retangulos[6].largura, retangulos[6].y+30, al_map_rgb(255, 191, 0));
+                al_draw_filled_rectangle(retangulos[5].x, retangulos[5].y, retangulos[5].x+retangulos[5].largura, retangulos[5].y+30, al_map_rgb(120, 222, 199));
+                al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
+                al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+                break;
+            case 8:
+                al_draw_filled_rectangle(retangulos[7].x, retangulos[7].y, retangulos[7].x+retangulos[7].largura, retangulos[7].y+30, al_map_rgb(120, 104, 230));
+                al_draw_filled_rectangle(retangulos[6].x, retangulos[6].y, retangulos[6].x+retangulos[6].largura, retangulos[6].y+30, al_map_rgb(255, 191, 0));
+                al_draw_filled_rectangle(retangulos[5].x, retangulos[5].y, retangulos[5].x+retangulos[5].largura, retangulos[5].y+30, al_map_rgb(120, 222, 199));
+                al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
+                al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+                break;
+        }
 
+        /// ---- Movimentação ----
         if(mouse)
         {
             if(ev.mouse.x >= 150 && ev.mouse.x <= 830)
-                pos_x = -150+(mouse * ev.mouse.x);
+                retangulos[0].x = -150+ev.mouse.x;
 
             if(ev.mouse.y >= 30 && ev.mouse.y <= 450)
-                pos_y = -15+(mouse * ev.mouse.y);
+                retangulos[0].y = -15+ev.mouse.y;
         }
 
         al_flip_display();
         al_clear_to_color(al_map_rgb(255, 255, 255));
+        /// --------
     }
-
-
-
-
 
     /// Finalizações
     al_destroy_display(display);
