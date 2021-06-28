@@ -15,7 +15,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="../../Desktop/allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-mt-debug.a" />
+					<Add library="allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-mt-debug.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -28,14 +28,14 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="../../Desktop/allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-mt.a" />
+					<Add library="allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-mt.a" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="../../Desktop/allegro-5.0.10-mingw-4.7.0/include" />
+			<Add directory="allegro-5.0.10-mingw-4.7.0/include" />
 		</Compiler>
 		<Unit filename="Jogo.cpp" />
 		<Unit filename="Jogo.h" />
