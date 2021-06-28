@@ -43,6 +43,7 @@ void imprimePilha(Node *pilha){
         x = Desempilha(&pAux);
         Empilha(&pilha, x);
     }
+    free(pAux);
 }
 
 void imprimePilha(Node *pilha1, Node *pilha2, Node *pilha3){

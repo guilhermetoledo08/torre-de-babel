@@ -1,3 +1,4 @@
+/*
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
@@ -269,8 +270,8 @@ int main()
 
     return 0;
 }
-
-/*#include <iostream>
+*/
+#include <iostream>
 #include <string>
 #include "Jogo.h"
 #include "Pilha.h"
@@ -334,7 +335,7 @@ int main() {
               break;
           }
           break;
-          default:
+        default:
             cout << "Pilha nao existe! Deve ser 1, 2 ou 3." <<endl;
             break;
       }
@@ -344,4 +345,4 @@ int main() {
   }
   cout <<endl << "Parabens, voce ganhou!!";
   return 0;
-}*/
+}
