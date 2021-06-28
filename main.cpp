@@ -45,7 +45,7 @@ int main()
         std::cout << "X: " << retangulos[i].x << " Y: " << retangulos[i].y << std::endl;
     }
 
-    bool fim = false, mouse = false;
+    bool fim = false, mouse = false, ant = false;
     ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 
     // This command create a screen
@@ -112,6 +112,7 @@ int main()
             if(ev.mouse.button & 1)
             {
                 mouse = !mouse;
+                ant = !mouse;
                 std::cout << "\nX: " << ev.mouse.x << " Y: " << ev.mouse.y << std::endl;
                 std::cout << "retangulos[0].x: " << retangulos[0].x << std::endl;
                 std::cout << "retangulos[0].x + retangulos[0].largura: " << retangulos[0].x+retangulos[0].largura << std::endl;
@@ -180,10 +181,10 @@ int main()
                     ev.mouse.y <= retangulos[0].y+30)
             {
 
-                if(ev.mouse.x >= 150 && ev.mouse.x <= 830)
+                //if(ev.mouse.x >= 150 && ev.mouse.x <= 830)
                     retangulos[0].x = -150+ev.mouse.x;
 
-                if(ev.mouse.y >= 30 && ev.mouse.y <= 450)
+               // if(ev.mouse.y >= 30 && ev.mouse.y <= 450)
                     retangulos[0].y = -15+ev.mouse.y;
 
             }
@@ -195,7 +196,8 @@ int main()
                     ev.mouse.y >= retangulos[1].y &&
                     ev.mouse.y <= retangulos[1].y+30)
             {
-
+                retangulos[1].x = -150+ev.mouse.x;
+                retangulos[1].y = -15+ev.mouse.y;
             }
 
             else
@@ -205,7 +207,8 @@ int main()
                     ev.mouse.y >= retangulos[2].y &&
                     ev.mouse.y <= retangulos[2].y+30)
             {
-
+                retangulos[2].x = -150+ev.mouse.x;
+                retangulos[2].y = -15+ev.mouse.y;
             }
 
             else
@@ -215,7 +218,8 @@ int main()
                     ev.mouse.y >= retangulos[3].y &&
                     ev.mouse.y <= retangulos[3].y+30)
             {
-
+                retangulos[3].x = -150+ev.mouse.x;
+                retangulos[3].y = -15+ev.mouse.y;
             }
 
             else
@@ -225,7 +229,8 @@ int main()
                     ev.mouse.y >= retangulos[4].y &&
                     ev.mouse.y <= retangulos[4].y+30)
             {
-
+                retangulos[4].x = -150+ev.mouse.x;
+                retangulos[4].y = -15+ev.mouse.y;
             }
 
             else
@@ -235,7 +240,8 @@ int main()
                     ev.mouse.y >= retangulos[5].y &&
                     ev.mouse.y <= retangulos[5].y+30)
             {
-
+                retangulos[5].x = -150+ev.mouse.x;
+                retangulos[5].y = -15+ev.mouse.y;
             }
 
             else
@@ -245,7 +251,8 @@ int main()
                     ev.mouse.y >= retangulos[6].y &&
                     ev.mouse.y <= retangulos[6].y+30)
             {
-
+                retangulos[6].x = -150+ev.mouse.x;
+                retangulos[6].y = -15+ev.mouse.y;
             }
 
             else
@@ -255,8 +262,25 @@ int main()
                     ev.mouse.y >= retangulos[7].y &&
                     ev.mouse.y <= retangulos[7].y+30)
             {
-
+                retangulos[7].x = -150+ev.mouse.x;
+                retangulos[7].y = -15+ev.mouse.y;
             }
+        }
+        else if (ant)
+        {
+            if(abs(ev.mouse.x-(bloco_l+3)) < abs(ev.mouse.x-((largura_t/2)+3)) &&
+                abs(ev.mouse.x-(bloco_l+3)) <  abs(ev.mouse.x-(largura_t-bloco_l+3)))
+            {
+                retangulos[0].x = pos_x;
+                retangulos[0].y = pos_y;
+            }
+            else
+                if(abs(ev.mouse.x-((largura_t/2)+3)) < abs(ev.mouse.x-(bloco_l+3)) &&
+                abs(ev.mouse.x-((largura_t/2)+3)) <  abs(ev.mouse.x-(largura_t-bloco_l+3)))
+                {
+                    retangulos[0].x = (largura_t/2+3)-150;
+                    retangulos[0].y = pos_y;
+                }
         }
 
         al_flip_display();
