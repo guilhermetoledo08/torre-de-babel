@@ -20,6 +20,7 @@ typedef struct
 int main()
 {
     int n;
+    printf("Numero de discos (de 3 a 8): ");
     scanf("%d", &n);
 
     float pos_x = bloco_l+3-150;
@@ -112,9 +113,9 @@ int main()
         //std::cout << "0 largura: " << retangulos[0].largura << std::endl;
         //std::cout << "1 largura: " << retangulos[1].largura << std::endl;
         //std::cout << "2 largura: " << retangulos[2].largura << std::endl;
-        std::cout << "X: " << ev.mouse.x << "Y: " << ev.mouse.y << std::endl;
+        std::cout << "X: " << ev.mouse.x << " Y: " << ev.mouse.y << std::endl;
 
-        /// ---- Desenhos ----
+        /// ----- Desenhos -----
 
         /// Torre 1
         al_draw_line(bloco_l, bloco_a, bloco_l, 400, al_map_rgb(148, 104, 70), 6);
@@ -128,11 +129,13 @@ int main()
         /// Linha horizontal
         al_draw_line(bloco_l-150, 400, largura_t-bloco_l+150, 400, al_map_rgb(148, 104, 70), 6);
 
-        /// Discos
+        /// Discos (0,1,2)
         al_draw_filled_rectangle(retangulos[2].x, retangulos[2].y, retangulos[2].x+retangulos[2].largura, retangulos[2].y+30, al_map_rgb(121, 82, 179));
         al_draw_filled_rectangle(retangulos[1].x, retangulos[1].y, retangulos[1].x+retangulos[1].largura, retangulos[1].y+30, al_map_rgb(251, 54, 64));
         al_draw_filled_rectangle(retangulos[0].x, retangulos[0].y, retangulos[0].x+retangulos[0].largura, retangulos[0].y+30, al_map_rgb(92, 51, 246));
 
+
+        /// Demais discos (3,4,5,6,7)
         switch(n)
         {
             case 4:
