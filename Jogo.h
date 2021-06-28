@@ -1,9 +1,8 @@
 #pragma once
-
 #include "Pilha.h"
 #include <string>
-using namespace std;
 
+using namespace std;
 
 // cria o jogo
 void criaJogo(Node**, Node**, Node**);
