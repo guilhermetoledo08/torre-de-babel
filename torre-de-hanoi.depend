@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1623795506 source:c:\users\guilhermevs\dev\torre-de-hanoi\jogo.cpp
+1624918956 source:c:\users\guilhermevs\dev\torre-de-hanoi\jogo.cpp
 	"Jogo.h"
 	"Pilha.h"
 	<iostream>
@@ -11,13 +11,14 @@
 1623793456 c:\users\guilhermevs\dev\torre-de-hanoi\pilha.h
 	<string>
 
-1624918173 source:c:\users\guilhermevs\dev\torre-de-hanoi\main.cpp
+1624927543 source:c:\users\guilhermevs\dev\torre-de-hanoi\main.cpp
 	<allegro5/allegro.h>
 	<allegro5/allegro_native_dialog.h>
 	<allegro5/allegro_primitives.h>
 	<cstdlib>
 	<ctime>
 	<iostream>
+	<math.h>
 	<iostream>
 	<string>
 	"Jogo.h"
