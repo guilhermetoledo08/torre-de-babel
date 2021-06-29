@@ -24,9 +24,10 @@ typedef struct
     bool topo;
 } ponto;
 
-void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
+/// ---- Movimentação ----
+void calculaPosicao(ALLEGRO_EVENT ev, ponto discos[], int selectedDisco)
 {
-    bool permitir = retangulos[selectedRetangulo].topo;
+    bool permitir = discos[selectedDisco].topo;
     ponto * ret;
     int quant = 0;
 
@@ -35,11 +36,11 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
     {
         for(int i = 0; i < n; i++)
         {
-            if(retangulos[i].torre == 1)
+            if(discos[i].torre == 1)
             {
-                if(selectedRetangulo != i) quant++;
-                if((retangulos[i].largura < retangulos[selectedRetangulo].largura) ||
-                        (retangulos[selectedRetangulo].topo == false))
+                if(selectedDisco != i) quant++;
+                if((discos[i].largura < discos[selectedDisco].largura) ||
+                        (discos[selectedDisco].topo == false))
                     permitir = false;
             }
         }
@@ -47,22 +48,22 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
         {
             for(int i = 0; i < n; i++)
             {
-                if(retangulos[i].torre == 1 && selectedRetangulo != i)
-                    retangulos[i].topo = false;
+                if(discos[i].torre == 1 && selectedDisco != i)
+                    discos[i].topo = false;
             }
-            if(retangulos[selectedRetangulo].torre != 1)
+            if(discos[selectedDisco].torre != 1)
             {
                 for(int i = 0; i < n; i++)
                 {
-                    if(retangulos[i].torre == retangulos[selectedRetangulo].torre &&
-                       i != selectedRetangulo)
-                        ret = &retangulos[i];
+                    if(discos[i].torre == discos[selectedDisco].torre &&
+                       i != selectedDisco)
+                        ret = &discos[i];
                 }
                 ret->topo = true;
             }
-            retangulos[selectedRetangulo].x = (bloco_l)-(retangulos[selectedRetangulo].largura/2);
-            retangulos[selectedRetangulo].torre = 1;
-            retangulos[selectedRetangulo].y = pos_y-(quant*30);
+            discos[selectedDisco].x = (bloco_l)-(discos[selectedDisco].largura/2);
+            discos[selectedDisco].torre = 1;
+            discos[selectedDisco].y = pos_y-(quant*30);
         }
     }
     else if(abs(ev.mouse.x-(largura_t/2)) < abs(ev.mouse.x-bloco_l) &&
@@ -70,11 +71,11 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
     {
         for(int i = 0; i < n; i++)
         {
-            if(retangulos[i].torre == 2)
+            if(discos[i].torre == 2)
             {
-                if(selectedRetangulo != i) quant++;
-                if((retangulos[i].largura < retangulos[selectedRetangulo].largura) ||
-                        (retangulos[selectedRetangulo].topo == false))
+                if(selectedDisco != i) quant++;
+                if((discos[i].largura < discos[selectedDisco].largura) ||
+                        (discos[selectedDisco].topo == false))
                     permitir = false;
             }
         }
@@ -82,22 +83,22 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
         {
             for(int i = 0; i < n; i++)
             {
-                if(retangulos[i].torre == 2 && selectedRetangulo != i)
-                    retangulos[i].topo = false;
+                if(discos[i].torre == 2 && selectedDisco != i)
+                    discos[i].topo = false;
             }
-            if(retangulos[selectedRetangulo].torre != 2)
+            if(discos[selectedDisco].torre != 2)
             {
                 for(int i = 0; i < n; i++)
                 {
-                    if(retangulos[i].torre == retangulos[selectedRetangulo].torre &&
-                       i != selectedRetangulo)
-                        ret = &retangulos[i];
+                    if(discos[i].torre == discos[selectedDisco].torre &&
+                       i != selectedDisco)
+                        ret = &discos[i];
                 }
                 ret->topo = true;
             }
-            retangulos[selectedRetangulo].x = (largura_t/2)-(retangulos[selectedRetangulo].largura/2);
-            retangulos[selectedRetangulo].torre = 2;
-            retangulos[selectedRetangulo].y = pos_y-(quant*30);
+            discos[selectedDisco].x = (largura_t/2)-(discos[selectedDisco].largura/2);
+            discos[selectedDisco].torre = 2;
+            discos[selectedDisco].y = pos_y-(quant*30);
         }
     }
     else if(abs(ev.mouse.x-(largura_t-bloco_l)) < abs(ev.mouse.x-bloco_l) &&
@@ -105,11 +106,11 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
     {
         for(int i = 0; i < n; i++)
         {
-            if(retangulos[i].torre == 3)
+            if(discos[i].torre == 3)
             {
-                if(selectedRetangulo != i) quant++;
-                if((retangulos[i].largura < retangulos[selectedRetangulo].largura) ||
-                        (retangulos[selectedRetangulo].topo == false))
+                if(selectedDisco != i) quant++;
+                if((discos[i].largura < discos[selectedDisco].largura) ||
+                        (discos[selectedDisco].topo == false))
                     permitir = false;
             }
         }
@@ -117,22 +118,22 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
         {
             for(int i = 0; i < n; i++)
             {
-                if(retangulos[i].torre == 3 && selectedRetangulo != i)
-                    retangulos[i].topo = false;
+                if(discos[i].torre == 3 && selectedDisco != i)
+                    discos[i].topo = false;
             }
-            if(retangulos[selectedRetangulo].torre != 3)
+            if(discos[selectedDisco].torre != 3)
             {
                 for(int i = 0; i < n; i++)
                 {
-                    if(retangulos[i].torre == retangulos[selectedRetangulo].torre &&
-                       i != selectedRetangulo)
-                        ret = &retangulos[i];
+                    if(discos[i].torre == discos[selectedDisco].torre &&
+                       i != selectedDisco)
+                        ret = &discos[i];
                 }
                 ret->topo = true;
             }
-            retangulos[selectedRetangulo].x = (largura_t-bloco_l)-(retangulos[selectedRetangulo].largura/2);
-            retangulos[selectedRetangulo].torre = 3;
-            retangulos[selectedRetangulo].y = pos_y-(quant*30);
+            discos[selectedDisco].x = (largura_t-bloco_l)-(discos[selectedDisco].largura/2);
+            discos[selectedDisco].torre = 3;
+            discos[selectedDisco].y = pos_y-(quant*30);
         }
     }
 }
@@ -147,33 +148,26 @@ int main()
             std::cout << "Erro: o numero de discos deve estar entrar 3 e 8!\n" << std::endl;
     }
 
-    int selectedRetangulo = n-1;
+    int selectedDisco = n-1;
 
-    ponto retangulos[n];
+    ponto discos[n];
 
+    /// ---- Definindo posições iniciais ----
     for(int i = 0; i < n; i++)
     {
-        retangulos[i].torre = 1;
+        discos[i].torre = 1;
 
         if(i == n-1)
-            retangulos[i].topo = true;
+            discos[i].topo = true;
         else
-            retangulos[i].topo = false;
+            discos[i].topo = false;
 
-        if(i == 0)
-        {
-            retangulos[i].x = pos_x;
-            retangulos[i].largura = bloco_l+104;
-        }
-        else
-        {
-            retangulos[i].x = pos_x+((25/1.4)*i);
-            retangulos[i].largura = bloco_l+104-((50/1.4)*i);
-        }
-        retangulos[i].y = pos_y-(i*30);
+        discos[i].x = pos_x+((25/1.4)*i);
+        discos[i].y = pos_y-(i*30);
+        discos[i].largura = bloco_l+104-((50/1.4)*i);
     }
 
-    bool fim = false, mouse = false, ant = false;
+    bool fim = false, mouse = false;
     ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 
     /// Cria a tela
@@ -216,10 +210,10 @@ int main()
             if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                 fim = true;
         }
-
         else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+        {
             fim = true;
-
+        }
         else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
         {
             if(ev.mouse.button & 1)
@@ -228,7 +222,7 @@ int main()
         else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
         {
             mouse = false;
-            calculaPosicao(ev, retangulos, selectedRetangulo);
+            calculaPosicao(ev, discos, selectedDisco);
         }
 
         /// ----- Desenhos -----
@@ -246,106 +240,105 @@ int main()
         al_draw_line(bloco_l-150, 400, largura_t-bloco_l+150, 400, al_map_rgb(148, 104, 70), 6);
 
         /// Discos (0,1,2)
-        al_draw_filled_rectangle(retangulos[2].x, retangulos[2].y, retangulos[2].x+retangulos[2].largura, retangulos[2].y+30, al_map_rgb(121, 82, 179));
-        al_draw_filled_rectangle(retangulos[1].x, retangulos[1].y, retangulos[1].x+retangulos[1].largura, retangulos[1].y+30, al_map_rgb(251, 54, 64));
-        al_draw_filled_rectangle(retangulos[0].x, retangulos[0].y, retangulos[0].x+retangulos[0].largura, retangulos[0].y+30, al_map_rgb(92, 51, 246));
-
+        al_draw_filled_rectangle(discos[2].x, discos[2].y, discos[2].x+discos[2].largura, discos[2].y+30, al_map_rgb(121, 82, 179));
+        al_draw_filled_rectangle(discos[1].x, discos[1].y, discos[1].x+discos[1].largura, discos[1].y+30, al_map_rgb(251, 54, 64));
+        al_draw_filled_rectangle(discos[0].x, discos[0].y, discos[0].x+discos[0].largura, discos[0].y+30, al_map_rgb(92, 51, 246));
 
         /// Demais discos (3,4,5,6,7)
         switch(n)
         {
         case 4:
-            al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+            al_draw_filled_rectangle(discos[3].x, discos[3].y, discos[3].x+discos[3].largura, discos[3].y+30, al_map_rgb(251, 122, 252));
             break;
         case 5:
-            al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
-            al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+            al_draw_filled_rectangle(discos[4].x, discos[4].y, discos[4].x+discos[4].largura, discos[4].y+30, al_map_rgb(27, 185, 247));
+            al_draw_filled_rectangle(discos[3].x, discos[3].y, discos[3].x+discos[3].largura, discos[3].y+30, al_map_rgb(251, 122, 252));
             break;
         case 6:
-            al_draw_filled_rectangle(retangulos[5].x, retangulos[5].y, retangulos[5].x+retangulos[5].largura, retangulos[5].y+30, al_map_rgb(120, 222, 199));
-            al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
-            al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+            al_draw_filled_rectangle(discos[5].x, discos[5].y, discos[5].x+discos[5].largura, discos[5].y+30, al_map_rgb(120, 222, 199));
+            al_draw_filled_rectangle(discos[4].x, discos[4].y, discos[4].x+discos[4].largura, discos[4].y+30, al_map_rgb(27, 185, 247));
+            al_draw_filled_rectangle(discos[3].x, discos[3].y, discos[3].x+discos[3].largura, discos[3].y+30, al_map_rgb(251, 122, 252));
             break;
         case 7:
-            al_draw_filled_rectangle(retangulos[6].x, retangulos[6].y, retangulos[6].x+retangulos[6].largura, retangulos[6].y+30, al_map_rgb(255, 191, 0));
-            al_draw_filled_rectangle(retangulos[5].x, retangulos[5].y, retangulos[5].x+retangulos[5].largura, retangulos[5].y+30, al_map_rgb(120, 222, 199));
-            al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
-            al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+            al_draw_filled_rectangle(discos[6].x, discos[6].y, discos[6].x+discos[6].largura, discos[6].y+30, al_map_rgb(255, 191, 0));
+            al_draw_filled_rectangle(discos[5].x, discos[5].y, discos[5].x+discos[5].largura, discos[5].y+30, al_map_rgb(120, 222, 199));
+            al_draw_filled_rectangle(discos[4].x, discos[4].y, discos[4].x+discos[4].largura, discos[4].y+30, al_map_rgb(27, 185, 247));
+            al_draw_filled_rectangle(discos[3].x, discos[3].y, discos[3].x+discos[3].largura, discos[3].y+30, al_map_rgb(251, 122, 252));
             break;
         case 8:
-            al_draw_filled_rectangle(retangulos[7].x, retangulos[7].y, retangulos[7].x+retangulos[7].largura, retangulos[7].y+30, al_map_rgb(120, 104, 230));
-            al_draw_filled_rectangle(retangulos[6].x, retangulos[6].y, retangulos[6].x+retangulos[6].largura, retangulos[6].y+30, al_map_rgb(255, 191, 0));
-            al_draw_filled_rectangle(retangulos[5].x, retangulos[5].y, retangulos[5].x+retangulos[5].largura, retangulos[5].y+30, al_map_rgb(120, 222, 199));
-            al_draw_filled_rectangle(retangulos[4].x, retangulos[4].y, retangulos[4].x+retangulos[4].largura, retangulos[4].y+30, al_map_rgb(27, 185, 247));
-            al_draw_filled_rectangle(retangulos[3].x, retangulos[3].y, retangulos[3].x+retangulos[3].largura, retangulos[3].y+30, al_map_rgb(251, 122, 252));
+            al_draw_filled_rectangle(discos[7].x, discos[7].y, discos[7].x+discos[7].largura, discos[7].y+30, al_map_rgb(120, 104, 230));
+            al_draw_filled_rectangle(discos[6].x, discos[6].y, discos[6].x+discos[6].largura, discos[6].y+30, al_map_rgb(255, 191, 0));
+            al_draw_filled_rectangle(discos[5].x, discos[5].y, discos[5].x+discos[5].largura, discos[5].y+30, al_map_rgb(120, 222, 199));
+            al_draw_filled_rectangle(discos[4].x, discos[4].y, discos[4].x+discos[4].largura, discos[4].y+30, al_map_rgb(27, 185, 247));
+            al_draw_filled_rectangle(discos[3].x, discos[3].y, discos[3].x+discos[3].largura, discos[3].y+30, al_map_rgb(251, 122, 252));
             break;
         }
 
-        /// ---- Movimentação ----
+        /// ---- Mapeamento dos discos ----
         if(mouse)
         {
-            if(ev.mouse.x >= retangulos[0].x &&
-                    ev.mouse.x <= retangulos[0].x+retangulos[0].largura &&
-                    ev.mouse.y >= retangulos[0].y &&
-                    ev.mouse.y <= retangulos[0].y+30)
+            if(ev.mouse.x >= discos[0].x &&
+                    ev.mouse.x <= discos[0].x+discos[0].largura &&
+                    ev.mouse.y >= discos[0].y &&
+                    ev.mouse.y <= discos[0].y+30)
             {
-                selectedRetangulo = 0;
+                selectedDisco = 0;
             }
 
-            else if(ev.mouse.x >= retangulos[1].x &&
-                    ev.mouse.x <= retangulos[1].x+retangulos[1].largura &&
-                    ev.mouse.y >= retangulos[1].y &&
-                    ev.mouse.y <= retangulos[1].y+30)
+            else if(ev.mouse.x >= discos[1].x &&
+                    ev.mouse.x <= discos[1].x+discos[1].largura &&
+                    ev.mouse.y >= discos[1].y &&
+                    ev.mouse.y <= discos[1].y+30)
             {
-                selectedRetangulo = 1;
+                selectedDisco = 1;
             }
 
-            else if(ev.mouse.x >= retangulos[2].x &&
-                    ev.mouse.x <= retangulos[2].x+retangulos[2].largura &&
-                    ev.mouse.y >= retangulos[2].y &&
-                    ev.mouse.y <= retangulos[2].y+30)
+            else if(ev.mouse.x >= discos[2].x &&
+                    ev.mouse.x <= discos[2].x+discos[2].largura &&
+                    ev.mouse.y >= discos[2].y &&
+                    ev.mouse.y <= discos[2].y+30)
             {
-                selectedRetangulo = 2;
+                selectedDisco = 2;
             }
 
-            else if(ev.mouse.x >= retangulos[3].x &&
-                    ev.mouse.x <= retangulos[3].x+retangulos[3].largura &&
-                    ev.mouse.y >= retangulos[3].y &&
-                    ev.mouse.y <= retangulos[3].y+30)
+            else if(ev.mouse.x >= discos[3].x &&
+                    ev.mouse.x <= discos[3].x+discos[3].largura &&
+                    ev.mouse.y >= discos[3].y &&
+                    ev.mouse.y <= discos[3].y+30)
             {
-                selectedRetangulo = 3;
+                selectedDisco = 3;
             }
 
-            else if(ev.mouse.x >= retangulos[4].x &&
-                    ev.mouse.x <= retangulos[4].x+retangulos[4].largura &&
-                    ev.mouse.y >= retangulos[4].y &&
-                    ev.mouse.y <= retangulos[4].y+30)
+            else if(ev.mouse.x >= discos[4].x &&
+                    ev.mouse.x <= discos[4].x+discos[4].largura &&
+                    ev.mouse.y >= discos[4].y &&
+                    ev.mouse.y <= discos[4].y+30)
             {
-                selectedRetangulo = 4;
+                selectedDisco = 4;
             }
 
-            else if(ev.mouse.x >= retangulos[5].x &&
-                    ev.mouse.x <= retangulos[5].x+retangulos[5].largura &&
-                    ev.mouse.y >= retangulos[5].y &&
-                    ev.mouse.y <= retangulos[5].y+30)
+            else if(ev.mouse.x >= discos[5].x &&
+                    ev.mouse.x <= discos[5].x+discos[5].largura &&
+                    ev.mouse.y >= discos[5].y &&
+                    ev.mouse.y <= discos[5].y+30)
             {
-                selectedRetangulo = 5;
+                selectedDisco = 5;
             }
 
-            else if(ev.mouse.x >= retangulos[6].x &&
-                    ev.mouse.x <= retangulos[6].x+retangulos[6].largura &&
-                    ev.mouse.y >= retangulos[6].y &&
-                    ev.mouse.y <= retangulos[6].y+30)
+            else if(ev.mouse.x >= discos[6].x &&
+                    ev.mouse.x <= discos[6].x+discos[6].largura &&
+                    ev.mouse.y >= discos[6].y &&
+                    ev.mouse.y <= discos[6].y+30)
             {
-                selectedRetangulo = 6;
+                selectedDisco = 6;
             }
 
-            else if(ev.mouse.x >= retangulos[7].x &&
-                    ev.mouse.x <= retangulos[7].x+retangulos[7].largura &&
-                    ev.mouse.y >= retangulos[7].y &&
-                    ev.mouse.y <= retangulos[7].y+30)
+            else if(ev.mouse.x >= discos[7].x &&
+                    ev.mouse.x <= discos[7].x+discos[7].largura &&
+                    ev.mouse.y >= discos[7].y &&
+                    ev.mouse.y <= discos[7].y+30)
             {
-                selectedRetangulo = 7;
+                selectedDisco = 7;
             }
         }
 
