@@ -21,11 +21,13 @@ typedef struct
     float y;
     float largura;
     int torre;
+    bool topo;
 } ponto;
 
 void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
 {
-    bool permitir = true;
+    bool permitir = retangulos[selectedRetangulo].topo;
+    ponto * ret;
     int quant = 0;
 
     if(abs(ev.mouse.x-bloco_l) < abs(ev.mouse.x-(largura_t/2)) &&
@@ -33,15 +35,31 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
     {
         for(int i = 0; i < n; i++)
         {
-            if(retangulos[i].torre == 1){
+            if(retangulos[i].torre == 1)
+            {
                 if(selectedRetangulo != i) quant++;
-                if(retangulos[i].largura < retangulos[selectedRetangulo].largura)
+                if((retangulos[i].largura < retangulos[selectedRetangulo].largura) ||
+                        (retangulos[selectedRetangulo].topo == false))
                     permitir = false;
             }
-
         }
         if(permitir)
         {
+            for(int i = 0; i < n; i++)
+            {
+                if(retangulos[i].torre == 1 && selectedRetangulo != i)
+                    retangulos[i].topo = false;
+            }
+            if(retangulos[selectedRetangulo].torre != 1)
+            {
+                for(int i = 0; i < n; i++)
+                {
+                    if(retangulos[i].torre == retangulos[selectedRetangulo].torre &&
+                       i != selectedRetangulo)
+                        ret = &retangulos[i];
+                }
+                ret->topo = true;
+            }
             retangulos[selectedRetangulo].x = (bloco_l)-(retangulos[selectedRetangulo].largura/2);
             retangulos[selectedRetangulo].torre = 1;
             retangulos[selectedRetangulo].y = pos_y-(quant*30);
@@ -55,12 +73,28 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
             if(retangulos[i].torre == 2)
             {
                 if(selectedRetangulo != i) quant++;
-                if(retangulos[i].largura < retangulos[selectedRetangulo].largura)
+                if((retangulos[i].largura < retangulos[selectedRetangulo].largura) ||
+                        (retangulos[selectedRetangulo].topo == false))
                     permitir = false;
             }
         }
         if(permitir)
         {
+            for(int i = 0; i < n; i++)
+            {
+                if(retangulos[i].torre == 2 && selectedRetangulo != i)
+                    retangulos[i].topo = false;
+            }
+            if(retangulos[selectedRetangulo].torre != 2)
+            {
+                for(int i = 0; i < n; i++)
+                {
+                    if(retangulos[i].torre == retangulos[selectedRetangulo].torre &&
+                       i != selectedRetangulo)
+                        ret = &retangulos[i];
+                }
+                ret->topo = true;
+            }
             retangulos[selectedRetangulo].x = (largura_t/2)-(retangulos[selectedRetangulo].largura/2);
             retangulos[selectedRetangulo].torre = 2;
             retangulos[selectedRetangulo].y = pos_y-(quant*30);
@@ -74,12 +108,28 @@ void calculaPosicao(ALLEGRO_EVENT ev, ponto retangulos[], int selectedRetangulo)
             if(retangulos[i].torre == 3)
             {
                 if(selectedRetangulo != i) quant++;
-                if(retangulos[i].largura < retangulos[selectedRetangulo].largura)
+                if((retangulos[i].largura < retangulos[selectedRetangulo].largura) ||
+                        (retangulos[selectedRetangulo].topo == false))
                     permitir = false;
             }
         }
         if(permitir)
         {
+            for(int i = 0; i < n; i++)
+            {
+                if(retangulos[i].torre == 3 && selectedRetangulo != i)
+                    retangulos[i].topo = false;
+            }
+            if(retangulos[selectedRetangulo].torre != 3)
+            {
+                for(int i = 0; i < n; i++)
+                {
+                    if(retangulos[i].torre == retangulos[selectedRetangulo].torre &&
+                       i != selectedRetangulo)
+                        ret = &retangulos[i];
+                }
+                ret->topo = true;
+            }
             retangulos[selectedRetangulo].x = (largura_t-bloco_l)-(retangulos[selectedRetangulo].largura/2);
             retangulos[selectedRetangulo].torre = 3;
             retangulos[selectedRetangulo].y = pos_y-(quant*30);
@@ -97,7 +147,6 @@ int main()
             std::cout << "Erro: o numero de discos deve estar entrar 3 e 8!\n" << std::endl;
     }
 
-
     int selectedRetangulo = n-1;
 
     ponto retangulos[n];
@@ -105,6 +154,12 @@ int main()
     for(int i = 0; i < n; i++)
     {
         retangulos[i].torre = 1;
+
+        if(i == n-1)
+            retangulos[i].topo = true;
+        else
+            retangulos[i].topo = false;
+
         if(i == 0)
         {
             retangulos[i].x = pos_x;
@@ -121,18 +176,18 @@ int main()
     bool fim = false, mouse = false, ant = false;
     ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 
-    // This command create a screen
+    /// Cria a tela
     ALLEGRO_DISPLAY* display;
 
-    // Allegro Setup Error Message
+    /// Configura uma mensagem de erro caso o Allegro não consiga inicializar
     if(!al_init())
         al_show_native_message_box(NULL,NULL,NULL,"Allegro couldnt initialize",NULL,NULL);
 
-    // Screen Resolution
+    /// Define a resolução da tela e adiciona um fundo branco
     display = al_create_display(largura_t,altura_t);
     al_clear_to_color(al_map_rgb(255, 255, 255));
 
-    // Allegro Screen Creating Error
+    /// Configura uma mensagem de erro caso a tela não consiga inicializar
     if(!display)
         al_show_native_message_box(NULL,NULL,NULL,"Couldnt create Screen",NULL,NULL);
 
@@ -141,7 +196,7 @@ int main()
     al_install_keyboard();
     al_install_mouse();
 
-    /// Criação de fila e demais dispositivos
+    /// Criação da fila de eventos
     fila_eventos = al_create_event_queue();
 
     /// Registro de sources
@@ -160,22 +215,6 @@ int main()
         {
             if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                 fim = true;
-
-            switch(ev.keyboard.keycode)
-            {
-            case ALLEGRO_KEY_UP:
-                //pos_y -= 10;
-                break;
-            case ALLEGRO_KEY_DOWN:
-                // pos_y += 10;
-                break;
-            case ALLEGRO_KEY_RIGHT:
-                //  pos_x += (largura_t/2)-bloco_l;
-                break;
-            case ALLEGRO_KEY_LEFT:
-                //  pos_x -= (largura_t/2)-bloco_l;
-                break;
-            }
         }
 
         else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
